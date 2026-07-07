@@ -13,4 +13,8 @@ function testVar() {
   console.log("Example 3 - var x:", x); // 10
  
 testVar();
+
+const user = { name: "Brishav", role: "Developer" };
+user.role = "MIS Engineer"; 
+console.log("Example 4 - const object:", user);
  
