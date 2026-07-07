@@ -17,4 +17,14 @@ testVar();
 const user = { name: "Brishav", role: "Developer" };
 user.role = "MIS Engineer"; 
 console.log("Example 4 - const object:", user);
+
+const str    = "Hello";          
+const num    = 42;               
+const bool   = true;            
+const nothing = null;          
+let notDefined;                 
+const sym    = Symbol("id");     
+const bigInt = 9007199254740991n; 
+ 
+console.log("Example 5 - types:", typeof str, typeof num, typeof bool, typeof nothing, typeof notDefined, typeof sym);
  
