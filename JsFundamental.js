@@ -27,4 +27,13 @@ const sym    = Symbol("id");
 const bigInt = 9007199254740991n; 
  
 console.log("Example 5 - types:", typeof str, typeof num, typeof bool, typeof nothing, typeof notDefined, typeof sym);
+ \
+ const str    = "Hello";          // String
+const num    = 42;               // Number
+const bool   = true;             // Boolean
+const nothing = null;            // Null
+let notDefined;                  // Undefined
+const sym    = Symbol("id");     // Symbol
+const bigInt = 9007199254740991n; // BigInt
  
+console.log("Example 5 - types:", typeof str, typeof num, typeof bool, typeof nothing, typeof notDefined, typeof sym);
