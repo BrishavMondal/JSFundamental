@@ -1,14 +1,4 @@
-/**
- * TypeScript Advanced Concepts
- * - Enums
- * - Literal Types
- * - Type Guards
- * - Discriminated Unions
- */
 
-/* ============================
-   Numeric Enum
-============================ */
 
 enum Status {
     Pending,
@@ -19,9 +9,7 @@ enum Status {
 const currentStatus: Status = Status.Approved;
 console.log(currentStatus);
 
-/* ============================
-   String Enum
-============================ */
+
 
 enum UserRole {
     Admin = "ADMIN",
@@ -32,9 +20,7 @@ enum UserRole {
 const role: UserRole = UserRole.Admin;
 console.log(role);
 
-/* ============================
-   Const Enum
-============================ */
+
 
 const enum Direction {
     Up,
@@ -46,9 +32,6 @@ const enum Direction {
 const move = Direction.Up;
 console.log(move);
 
-/* ============================
-   Literal Types
-============================ */
 
 type Theme = "light" | "dark";
 
@@ -58,14 +41,9 @@ function setTheme(theme: Theme): void {
 
 setTheme("light");
 
-/* ============================
-   Type Guards - typeof
-============================ */
 
-/**
- * Prints value based on primitive type.
- * @param value Number or string.
- */
+
+
 function printValue(value: string | number): void {
     if (typeof value === "string") {
         console.log(value.toUpperCase());
@@ -77,9 +55,6 @@ function printValue(value: string | number): void {
 printValue("typescript");
 printValue(25);
 
-/* ============================
-   Type Guards - instanceof
-============================ */
 
 class Dog {
     bark(): void {
@@ -93,10 +68,7 @@ class Cat {
     }
 }
 
-/**
- * Determines animal type.
- * @param animal Dog or Cat.
- */
+
 function speak(animal: Dog | Cat): void {
     if (animal instanceof Dog) {
         animal.bark();
@@ -108,9 +80,6 @@ function speak(animal: Dog | Cat): void {
 speak(new Dog());
 speak(new Cat());
 
-/* ============================
-   Type Guards - in
-============================ */
 
 interface Car {
     drive(): void;
@@ -120,10 +89,7 @@ interface Boat {
     sail(): void;
 }
 
-/**
- * Uses "in" operator to narrow types.
- * @param vehicle Car or Boat.
- */
+
 function operate(vehicle: Car | Boat): void {
     if ("drive" in vehicle) {
         vehicle.drive();
@@ -144,9 +110,7 @@ operate({
     }
 });
 
-/* ============================
-   Discriminated Unions
-============================ */
+
 
 interface Square {
     kind: "square";
@@ -166,11 +130,10 @@ interface Rectangle {
 
 type Shape = Square | Circle | Rectangle;
 
-/**
- * Calculates shape area.
- * @param shape Shape object.
- * @returns Area.
- */
+
+  @param shape 
+  @returns 
+ 
 function getArea(shape: Shape): number {
     switch (shape.kind) {
         case "square":
@@ -188,9 +151,6 @@ console.log(getArea({ kind: "square", size: 4 }));
 console.log(getArea({ kind: "circle", radius: 5 }));
 console.log(getArea({ kind: "rectangle", width: 8, height: 3 }));
 
-/* ============================
-   Type Assertions
-============================ */
 
 const username: unknown = "Brishav";
 
