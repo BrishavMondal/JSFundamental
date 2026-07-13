@@ -1,4 +1,6 @@
 
+/* Numeric Enum */
+
 
 enum Status {
     Pending,
@@ -9,6 +11,7 @@ enum Status {
 const currentStatus: Status = Status.Approved;
 console.log(currentStatus);
 
+/* String Enum */
 
 
 enum UserRole {
@@ -20,6 +23,7 @@ enum UserRole {
 const role: UserRole = UserRole.Admin;
 console.log(role);
 
+/* Const Enum */
 
 
 const enum Direction {
@@ -29,57 +33,72 @@ const enum Direction {
     Right
 }
 
-const move = Direction.Up;
-console.log(move);
+const direction = Direction.Up;
+console.log(direction);
+
+/* Literal Types */
 
 
 type Theme = "light" | "dark";
 
+
 function setTheme(theme: Theme): void {
-    console.log(`Theme: ${theme}`);
+    console.log(`Theme selected: ${theme}`);
 }
 
 setTheme("light");
 
-
+/* Type Guard - typeof */
 
 
 function printValue(value: string | number): void {
+
     if (typeof value === "string") {
         console.log(value.toUpperCase());
     } else {
         console.log(value.toFixed(2));
     }
+
 }
 
 printValue("typescript");
 printValue(25);
 
+/* Type Guard - instanceof */
+
+/*Dog class.*/
 
 class Dog {
+
     bark(): void {
         console.log("Woof!");
     }
+
 }
 
+/**Cat class*/
 class Cat {
+
     meow(): void {
         console.log("Meow!");
     }
+
 }
 
-
 function speak(animal: Dog | Cat): void {
+
     if (animal instanceof Dog) {
         animal.bark();
     } else {
         animal.meow();
     }
+
 }
 
 speak(new Dog());
 speak(new Cat());
 
+/* Type Guard - in*/
 
 interface Car {
     drive(): void;
@@ -91,11 +110,13 @@ interface Boat {
 
 
 function operate(vehicle: Car | Boat): void {
+
     if ("drive" in vehicle) {
         vehicle.drive();
     } else {
         vehicle.sail();
     }
+
 }
 
 operate({
@@ -110,7 +131,7 @@ operate({
     }
 });
 
-
+/* Discriminated Unions*/
 
 interface Square {
     kind: "square";
@@ -131,11 +152,10 @@ interface Rectangle {
 type Shape = Square | Circle | Rectangle;
 
 
-  @param shape 
-  @returns 
- 
 function getArea(shape: Shape): number {
+
     switch (shape.kind) {
+
         case "square":
             return shape.size * shape.size;
 
@@ -144,19 +164,36 @@ function getArea(shape: Shape): number {
 
         case "rectangle":
             return shape.width * shape.height;
+
     }
+
 }
 
-console.log(getArea({ kind: "square", size: 4 }));
-console.log(getArea({ kind: "circle", radius: 5 }));
-console.log(getArea({ kind: "rectangle", width: 8, height: 3 }));
+console.log(getArea({
+    kind: "square",
+    size: 5
+}));
 
+console.log(getArea({
+    kind: "circle",
+    radius: 10
+}));
+
+console.log(getArea({
+    kind: "rectangle",
+    width: 5,
+    height: 8
+}));
+
+/* ==========================
+   Type Assertions
+========================== */
 
 const username: unknown = "Brishav";
 
-const userLength = (username as string).length;
+const length1 = (username as string).length;
 
-const anotherLength = (<string>username).length;
+const length2 = (<string>username).length;
 
-console.log(userLength);
-console.log(anotherLength);
+console.log(length1);
+console.log(length2);
