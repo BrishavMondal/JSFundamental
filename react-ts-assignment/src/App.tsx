@@ -1,122 +1,111 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import { useState } from "react";
+import Button from "./components/Button";
+import Card from "./components/Card";
+import Input from "./components/Input";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState<number>(0);
+
+  const [name, setName] = useState<string>("");
+
+  const [student, setStudent] = useState({
+    name: "Brishav",
+    age: 24,
+  });
+
+  const [skills, setSkills] = useState<string[]>([
+    "HTML",
+    "CSS",
+    "JavaScript",
+  ]);
+
+  const increment = () => {
+    setCount((prev) => prev + 1);
+  };
+
+  const updateStudent = () => {
+    setStudent({
+      ...student,
+      age: student.age + 1,
+    });
+  };
+
+  const addSkill = () => {
+    setSkills((prev) => [...prev, "React"]);
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    alert(`Hello ${name}`);
+  };
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
+    <div style={{ padding: "40px" }}>
+      <h1>React + TypeScript Demo</h1>
+
+      <Card title="Counter Example">
+        <p>Count: {count}</p>
+
+        <Button
+          variant="primary"
+          size="medium"
+          onClick={increment}
         >
-          Count is {count}
-        </button>
-      </section>
+          Increment
+        </Button>
+      </Card>
 
-      <div className="ticks"></div>
+      <Card title="Object State">
+        <p>Name: {student.name}</p>
+        <p>Age: {student.age}</p>
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+        <Button
+          variant="secondary"
+          size="medium"
+          onClick={updateStudent}
+        >
+          Increase Age
+        </Button>
+      </Card>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+      <Card title="Array State">
+        <ul>
+          {skills.map((skill, index) => (
+            <li key={index}>{skill}</li>
+          ))}
+        </ul>
+
+        <Button
+          variant="primary"
+          size="small"
+          onClick={addSkill}
+        >
+          Add React
+        </Button>
+      </Card>
+
+      <Card title="Controlled Form">
+        <form onSubmit={handleSubmit}>
+          <Input
+            value={name}
+            placeholder="Enter Name"
+            onChange={(e) => setName(e.target.value)}
+          />
+
+          <br />
+
+          <Button
+            variant="primary"
+            size="large"
+          >
+            Submit
+          </Button>
+        </form>
+
+        <p>You typed: {name}</p>
+      </Card>
+    </div>
+  );
 }
 
-export default App
+export default App;
