@@ -19,33 +19,51 @@ export default function TaskItem({
   const [title, setTitle] = useState(task.title);
   const [description, setDescription] = useState(task.description);
 
+  const saveTask = () => {
+    if (!title.trim()) return;
+
+    onEdit({
+      ...task,
+      title,
+      description,
+    });
+
+    setEditing(false);
+  };
+
   return (
-    <div className="task">
+    <div className={`task ${task.completed ? "completed" : ""}`}>
       {editing ? (
         <>
           <input
+            type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
+            placeholder="Task Title"
           />
 
           <textarea
             value={description}
             onChange={(e) => setDescription(e.target.value)}
+            placeholder="Task Description"
           />
 
-          <button
-            onClick={() => {
-              onEdit({
-                ...task,
-                title,
-                description,
-              });
+          <div className="task-buttons">
+            <button className="complete-btn" onClick={saveTask}>
+              Save
+            </button>
 
-              setEditing(false);
-            }}
-          >
-            Save
-          </button>
+            <button
+              className="delete-btn"
+              onClick={() => {
+                setTitle(task.title);
+                setDescription(task.description);
+                setEditing(false);
+              }}
+            >
+              Cancel
+            </button>
+          </div>
         </>
       ) : (
         <>
@@ -53,21 +71,37 @@ export default function TaskItem({
 
           <p>{task.description}</p>
 
-          <p>{task.priority}</p>
+          <span className={`priority ${task.priority.toLowerCase()}`}>
+            {task.priority}
+          </span>
 
-          <input
-            type="checkbox"
-            checked={task.completed}
-            onChange={() => onToggle(task.id)}
-          />
+          <p>
+            <strong>Status:</strong>{" "}
+            {task.completed ? "Completed ✅" : "Active ⏳"}
+          </p>
 
-          <button onClick={() => setEditing(true)}>
-            Edit
-          </button>
+          <div className="task-buttons">
+            <button
+              className="complete-btn"
+              onClick={() => onToggle(task.id)}
+            >
+              {task.completed ? "Undo" : "Complete"}
+            </button>
 
-          <button onClick={() => onDelete(task.id)}>
-            Delete
-          </button>
+            <button
+              className="edit-btn"
+              onClick={() => setEditing(true)}
+            >
+              Edit
+            </button>
+
+            <button
+              className="delete-btn"
+              onClick={() => onDelete(task.id)}
+            >
+              Delete
+            </button>
+          </div>
         </>
       )}
     </div>
